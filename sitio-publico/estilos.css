@@ -1,0 +1,321 @@
+/* =========================================================
+   Hoja de estilos externa del sitio público - Club Los Algarrobos
+   (M1 Lectura 2: hojas externas, selectores, herencia y diseño responsivo)
+   ========================================================= */
+
+/* ---------- Variables de color (se reutilizan en toda la hoja) ---------- */
+:root {
+    --verde: #2f6b3a;
+    --verde-claro: #e6f0e7;
+    --marron: #7a5230;
+    --crema: #f5efe0;
+    --texto: #222222;
+    --gris: #6b6b6b;
+    --rojo: #b3261e;
+    --blanco: #ffffff;
+}
+
+/* ---------- SELECTORES DE TIPO: afectan a todas las etiquetas de ese tipo ---------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    color: var(--texto); /* propiedad heredada: la toman todos los hijos */
+    background-color: var(--crema);
+
+    /* Diseño de página: encabezado arriba, main + aside al medio, pie abajo */
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas:
+        "encabezado encabezado"
+        "principal  lateral"
+        "pie        pie";
+    gap: 0 24px;
+}
+
+h1, h2, h3 {
+    color: var(--verde);
+    line-height: 1.2;
+}
+
+main {
+    grid-area: principal;
+    padding: 16px 24px;
+}
+
+aside {
+    grid-area: lateral;
+    margin: 16px 24px 16px 0;
+    padding: 16px;
+    background-color: var(--verde-claro);
+    border-left: 4px solid var(--verde);
+    border-radius: 8px;
+    align-self: start;
+}
+
+footer {
+    grid-area: pie;
+    padding: 16px;
+    text-align: center;
+    color: var(--blanco);
+    background-color: var(--verde);
+}
+
+address {
+    font-style: normal;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #b9b9b9;
+    border-radius: 6px;
+}
+
+button {
+    padding: 10px 16px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* ---------- SELECTORES DE ID: un único elemento por página ---------- */
+#encabezado {
+    grid-area: encabezado;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+    padding: 12px 24px;
+    background-color: var(--blanco);
+    border-bottom: 4px solid var(--verde);
+}
+
+#encabezado h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    flex: 1;
+}
+
+#form-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 12px;
+}
+
+#form-filtros label {
+    margin-top: 0;
+}
+
+#form-filtros select,
+#form-filtros input {
+    width: auto;
+}
+
+#boton-volver {
+    background-color: #dddddd;
+    color: var(--texto);
+}
+
+#mensaje-exito {
+    padding: 12px;
+    color: var(--verde);
+    background-color: var(--verde-claro);
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* ---------- SELECTORES DE CLASE: reutilizables en varios elementos ---------- */
+.logo {
+    display: block;
+}
+
+.menu {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--verde);
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.menu a:hover,
+.menu .activo {
+    color: var(--blanco);
+    background-color: var(--verde);
+}
+
+.boton {
+    display: inline-block;
+    padding: 10px 16px;
+    color: var(--blanco);
+    background-color: var(--verde);
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.boton:hover {
+    background-color: var(--marron);
+}
+
+.lista-disciplinas {
+    columns: 2;
+}
+
+.oculto {
+    display: none;
+}
+
+/* Grilla de tarjetas del catálogo: 3 columnas en pantallas grandes */
+.grilla {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+/* Tarjeta de actividad: el article la crea script.js con la clase "tarjeta" */
+.tarjeta {
+    padding: 16px;
+    background-color: var(--blanco);
+    border-top: 6px solid var(--verde);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.tarjeta h3 {
+    margin-top: 0;
+}
+
+.tarjeta .disciplina {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 0.85rem;
+    color: var(--verde);
+    background-color: var(--verde-claro);
+    border-radius: 12px;
+}
+
+.tarjeta .cuota {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--marron);
+}
+
+/* Formulario de preinscripción */
+.campo {
+    margin-bottom: 12px;
+}
+
+.error {
+    display: block;
+    min-height: 1.2em;
+    font-size: 0.9rem;
+    color: var(--rojo);
+}
+
+/* script.js agrega la clase "invalido" al campo con error */
+.invalido {
+    border-color: var(--rojo);
+    background-color: #fdecea;
+}
+
+/* ---------- SELECTORES DE ATRIBUTO: eligen elementos según un atributo ---------- */
+
+/* Todos los campos numéricos (filtro de edad) */
+input[type="number"] {
+    max-width: 120px;
+}
+
+/* Botones de envío de formularios */
+button[type="submit"] {
+    color: var(--blanco);
+    background-color: var(--verde);
+}
+
+/* Enlaces de mail y teléfono: se marcan con un ícono antes del texto */
+a[href^="mailto:"]::before {
+    content: "✉ ";
+}
+
+a[href^="tel:"]::before {
+    content: "☎ ";
+}
+
+/* ---------- DISEÑO RESPONSIVO (media queries) ---------- */
+
+/* Tablet: el catálogo pasa a 2 columnas */
+@media (max-width: 900px) {
+    .grilla {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Celular: todo en una sola columna (requisito del enunciado) */
+@media (max-width: 600px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "encabezado"
+            "principal"
+            "lateral"
+            "pie";
+    }
+
+    aside {
+        margin: 0 16px 16px;
+    }
+
+    main {
+        padding: 12px 16px;
+    }
+
+    #encabezado h1 {
+        font-size: 1.25rem;
+    }
+
+    .menu {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .grilla {
+        grid-template-columns: 1fr; /* tarjetas de actividades en una columna */
+    }
+
+    .lista-disciplinas {
+        columns: 1;
+    }
+
+    #form-filtros {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #form-filtros select,
+    #form-filtros input {
+        width: 100%;
+        max-width: none;
+    }
+}
