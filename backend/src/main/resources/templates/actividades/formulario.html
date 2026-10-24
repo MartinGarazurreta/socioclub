@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabecera(${titulo})}"></head>
+<body>
+<header th:replace="~{fragmentos :: encabezado}"></header>
+
+<main>
+    <h2 th:text="${titulo}">Nueva actividad</h2>
+
+    <p th:if="${error}" th:text="${error}" class="alerta error"></p>
+
+    <!-- th:object enlaza el formulario con el objeto Actividad; th:field enlaza cada campo con un atributo -->
+    <form th:action="@{/actividades/guardar}" th:object="${actividad}" method="post" class="formulario">
+        <input type="hidden" th:field="*{id}">
+
+        <label for="nombre">Nombre</label>
+        <input type="text" th:field="*{nombre}" required maxlength="60">
+
+        <label for="disciplina">Disciplina</label>
+        <input type="text" th:field="*{disciplina}" required maxlength="40">
+
+        <label for="profesor">Profesor/a</label>
+        <input type="text" th:field="*{profesor}" required maxlength="60">
+
+        <div class="fila">
+            <div>
+                <label for="dias">Días</label>
+                <input type="text" th:field="*{dias}" required maxlength="40" placeholder="Lun y Mié">
+            </div>
+            <div>
+                <label for="horario">Horario</label>
+                <input type="text" th:field="*{horario}" required maxlength="10" placeholder="18:00">
+            </div>
+        </div>
+
+        <div class="fila">
+            <div>
+                <label for="edadMinima">Edad mínima</label>
+                <input type="number" th:field="*{edadMinima}" required min="1" max="99">
+            </div>
+            <div>
+                <label for="edadMaxima">Edad máxima</label>
+                <input type="number" th:field="*{edadMaxima}" required min="1" max="99">
+            </div>
+        </div>
+
+        <div class="fila">
+            <div>
+                <label for="cupoMaximo">Cupo máximo</label>
+                <input type="number" th:field="*{cupoMaximo}" required min="1">
+            </div>
+            <div>
+                <label for="cuotaMensual">Cuota mensual ($)</label>
+                <input type="number" th:field="*{cuotaMensual}" required min="0" step="1">
+            </div>
+        </div>
+
+        <div class="botones">
+            <button type="submit" class="boton">Guardar</button>
+            <a th:href="@{/actividades}" class="boton secundario">Cancelar</a>
+        </div>
+    </form>
+</main>
+
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>

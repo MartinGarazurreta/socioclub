@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabecera('Actividades')}"></head>
+<body>
+<header th:replace="~{fragmentos :: encabezado}"></header>
+
+<main>
+    <div class="titulo-seccion">
+        <h2>Actividades</h2>
+        <a th:href="@{/actividades/nueva}" class="boton">+ Nueva actividad</a>
+    </div>
+
+    <!-- Mensajes que llegan desde el controlador después de guardar o eliminar -->
+    <p th:if="${mensaje}" th:text="${mensaje}" class="alerta exito"></p>
+    <p th:if="${error}" th:text="${error}" class="alerta error"></p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Actividad</th>
+            <th>Disciplina</th>
+            <th>Días y horario</th>
+            <th>Edades</th>
+            <th>Profesor/a</th>
+            <th>Cuota</th>
+            <th>Cupo máximo</th>
+            <th>Cupo disponible</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- th:each recorre la lista que el controlador puso en el Model -->
+        <tr th:each="a : ${actividades}">
+            <td th:text="${a.nombre}">Fútbol infantil</td>
+            <td th:text="${a.disciplina}">Fútbol</td>
+            <td th:text="${a.dias} + ' ' + ${a.horario}">Lun y Mié 18:00</td>
+            <td th:text="${a.edadMinima} + ' a ' + ${a.edadMaxima}">6 a 12</td>
+            <td th:text="${a.profesor}">Diego Ferreyra</td>
+            <td th:text="'$ ' + ${#numbers.formatDecimal(a.cuotaMensual, 1, 'POINT', 0, 'COMMA')}">$ 18.000</td>
+            <td th:text="${a.cupoMaximo}">40</td>
+            <td>
+                <span th:text="${cupos.get(a.id)}"
+                      th:class="${cupos.get(a.id) == 0} ? 'cupo sin-cupo' : (${cupos.get(a.id) <= 3} ? 'cupo poco-cupo' : 'cupo')">12</span>
+            </td>
+            <td class="acciones">
+                <a th:href="@{/actividades/{id}/editar(id=${a.id})}" class="boton chico">Editar</a>
+                <form th:action="@{/actividades/{id}/eliminar(id=${a.id})}" method="post"
+                      onsubmit="return confirm('¿Eliminar esta actividad?');">
+                    <button type="submit" class="boton chico peligro">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p th:if="${#lists.isEmpty(actividades)}">No hay actividades cargadas.</p>
+</main>
+
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>

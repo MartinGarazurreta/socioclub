@@ -1,0 +1,191 @@
+/* Estilos del sistema de secretaría (vistas Thymeleaf) */
+:root {
+    --verde: #2f6b3a;
+    --verde-claro: #e6f0e7;
+    --rojo: #b3261e;
+    --naranja: #b26a00;
+    --gris: #f4f4f4;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #222222;
+    background-color: #fafafa;
+}
+
+.encabezado {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    color: #ffffff;
+    background-color: var(--verde);
+}
+
+.encabezado h1 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.encabezado ul {
+    display: flex;
+    gap: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.encabezado a {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px;
+}
+
+.titulo-seccion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+}
+
+th {
+    background-color: var(--verde-claro);
+}
+
+.acciones {
+    display: flex;
+    gap: 6px;
+}
+
+.acciones form {
+    margin: 0;
+}
+
+.boton {
+    display: inline-block;
+    padding: 8px 14px;
+    font-size: 0.95rem;
+    color: #ffffff;
+    background-color: var(--verde);
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.boton.chico {
+    padding: 4px 10px;
+    font-size: 0.85rem;
+}
+
+.boton.peligro {
+    background-color: var(--rojo);
+}
+
+.boton.secundario {
+    color: #222222;
+    background-color: #dddddd;
+}
+
+.cupo {
+    font-weight: bold;
+}
+
+.poco-cupo {
+    color: var(--naranja);
+}
+
+.sin-cupo {
+    color: var(--rojo);
+}
+
+.alerta {
+    padding: 10px 14px;
+    border-radius: 6px;
+}
+
+.alerta.exito {
+    color: var(--verde);
+    background-color: var(--verde-claro);
+}
+
+.alerta.error {
+    color: var(--rojo);
+    background-color: #fdecea;
+}
+
+.formulario {
+    max-width: 600px;
+}
+
+.formulario label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.formulario input {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #bbbbbb;
+    border-radius: 6px;
+}
+
+.fila {
+    display: flex;
+    gap: 16px;
+}
+
+.fila > div {
+    flex: 1;
+}
+
+.botones {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.pie {
+    padding: 16px;
+    margin-top: 32px;
+    text-align: center;
+    color: #666666;
+    background-color: var(--gris);
+}
+
+@media (max-width: 700px) {
+    table {
+        font-size: 0.85rem;
+    }
+
+    .fila {
+        flex-direction: column;
+        gap: 0;
+    }
+}
