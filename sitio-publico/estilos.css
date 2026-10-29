@@ -5,11 +5,11 @@
 
 /* ---------- Variables de color (se reutilizan en toda la hoja) ---------- */
 :root {
-    --verde: #2f6b3a;
-    --verde-claro: #e6f0e7;
-    --marron: #7a5230;
-    --crema: #f5efe0;
-    --texto: #222222;
+    --primario: #1d3557;
+    --primario-claro: #e8eef7;
+    --acento: #e76f51;
+    --fondo: #f4f6fa;
+    --texto: #1b2333;
     --gris: #6b6b6b;
     --rojo: #b3261e;
     --blanco: #ffffff;
@@ -22,10 +22,10 @@
 
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
     line-height: 1.5;
     color: var(--texto); /* propiedad heredada: la toman todos los hijos */
-    background-color: var(--crema);
+    background-color: var(--fondo);
 
     /* Diseño de página: encabezado arriba, main + aside al medio, pie abajo */
     display: grid;
@@ -38,7 +38,7 @@ body {
 }
 
 h1, h2, h3 {
-    color: var(--verde);
+    color: var(--primario);
     line-height: 1.2;
 }
 
@@ -51,9 +51,9 @@ aside {
     grid-area: lateral;
     margin: 16px 24px 16px 0;
     padding: 16px;
-    background-color: var(--verde-claro);
-    border-left: 4px solid var(--verde);
-    border-radius: 8px;
+    background-color: var(--blanco);
+    border: 2px solid var(--primario-claro);
+    border-radius: 16px;
     align-self: start;
 }
 
@@ -62,7 +62,7 @@ footer {
     padding: 16px;
     text-align: center;
     color: var(--blanco);
-    background-color: var(--verde);
+    background-color: #0f1f38;
 }
 
 address {
@@ -82,15 +82,16 @@ textarea {
     padding: 8px;
     font-size: 1rem;
     border: 1px solid #b9b9b9;
-    border-radius: 6px;
+    border-radius: 10px;
 }
 
 button {
     padding: 10px 16px;
     font-size: 1rem;
     border: none;
-    border-radius: 6px;
+    border-radius: 999px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 /* ---------- SELECTORES DE ID: un único elemento por página ---------- */
@@ -101,8 +102,12 @@ button {
     align-items: center;
     gap: 12px 20px;
     padding: 12px 24px;
-    background-color: var(--blanco);
-    border-bottom: 4px solid var(--verde);
+    background-color: var(--primario);
+    border-bottom: 4px solid var(--acento);
+}
+
+#encabezado h1 {
+    color: var(--blanco);
 }
 
 #encabezado h1 {
@@ -134,8 +139,8 @@ button {
 
 #mensaje-exito {
     padding: 12px;
-    color: var(--verde);
-    background-color: var(--verde-claro);
+    color: var(--primario);
+    background-color: var(--primario-claro);
     border-radius: 6px;
     font-weight: bold;
 }
@@ -155,29 +160,29 @@ button {
 
 .menu a {
     display: block;
-    padding: 8px 12px;
-    color: var(--verde);
+    padding: 8px 16px;
+    color: var(--blanco);
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 999px;
 }
 
 .menu a:hover,
 .menu .activo {
     color: var(--blanco);
-    background-color: var(--verde);
+    background-color: var(--acento);
 }
 
 .boton {
     display: inline-block;
     padding: 10px 16px;
     color: var(--blanco);
-    background-color: var(--verde);
+    background-color: var(--acento);
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 999px;
 }
 
 .boton:hover {
-    background-color: var(--marron);
+    background-color: var(--primario);
 }
 
 .lista-disciplinas {
@@ -199,9 +204,14 @@ button {
 .tarjeta {
     padding: 16px;
     background-color: var(--blanco);
-    border-top: 6px solid var(--verde);
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    border: 1px solid #dde3ee;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(29, 53, 87, 0.10);
+    transition: transform 0.2s;
+}
+
+.tarjeta:hover {
+    transform: translateY(-4px);
 }
 
 .tarjeta h3 {
@@ -212,15 +222,15 @@ button {
     display: inline-block;
     padding: 2px 8px;
     font-size: 0.85rem;
-    color: var(--verde);
-    background-color: var(--verde-claro);
-    border-radius: 12px;
+    color: var(--blanco);
+    background-color: var(--primario);
+    border-radius: 999px;
 }
 
 .tarjeta .cuota {
     font-size: 1.2rem;
     font-weight: bold;
-    color: var(--marron);
+    color: var(--acento);
 }
 
 /* Formulario de preinscripción */
@@ -251,7 +261,7 @@ input[type="number"] {
 /* Botones de envío de formularios */
 button[type="submit"] {
     color: var(--blanco);
-    background-color: var(--verde);
+    background-color: var(--acento);
 }
 
 /* Enlaces de mail y teléfono: se marcan con un ícono antes del texto */
