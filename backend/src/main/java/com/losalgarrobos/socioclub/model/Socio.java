@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -33,6 +34,8 @@ public class Socio {
     @Column(nullable = false, length = 60)
     private String apellido;
 
+    // @DateTimeFormat: el <input type="date"> manda la fecha como "2012-02-20" (formato ISO)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "fecha_nacimiento", nullable = false)
     private LocalDate fechaNacimiento;
 

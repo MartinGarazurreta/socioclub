@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabecera('Inscriptos')}"></head>
+<body>
+<header th:replace="~{fragmentos :: encabezado}"></header>
+
+<main>
+    <div class="titulo-seccion">
+        <h2 th:text="'Inscriptos en ' + ${actividad.nombre}">Inscriptos en Yoga</h2>
+        <a th:href="@{/inscripciones/nueva(actividadId=${actividad.id})}" class="boton">+ Inscribir socio</a>
+    </div>
+
+    <p th:if="${mensaje}" th:text="${mensaje}" class="alerta exito"></p>
+
+    <!-- RF7: inscriptos activos y cupo disponible -->
+    <p class="resumen-cupo">
+        <span th:text="${#lists.size(inscripciones)} + ' de ' + ${actividad.cupoMaximo} + ' lugares ocupados · '">14 de 15 lugares ocupados ·</span>
+        <span th:text="${cupoDisponible} + ' disponibles'"
+              th:class="${cupoDisponible == 0} ? 'cupo sin-cupo' : (${cupoDisponible <= 3} ? 'cupo poco-cupo' : 'cupo')">1 disponibles</span>
+    </p>
+
+    <table th:unless="${#lists.isEmpty(inscripciones)}">
+        <thead>
+        <tr>
+            <th>Socio</th>
+            <th>DNI</th>
+            <th>Edad</th>
+            <th>Cuota</th>
+            <th>Inscripto desde</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="i : ${inscripciones}">
+            <td><a th:href="@{/socios/{id}(id=${i.socio.id})}" th:text="${i.socio.nombreCompleto}">Moyano, Lucía</a></td>
+            <td th:text="${i.socio.dni}">35123987</td>
+            <td th:text="${i.socio.edad}">36</td>
+            <td>
+                <span th:text="${i.socio.estadoCuota.name() == 'MOROSO'} ? 'Moroso' : 'Al día'"
+                      th:class="${i.socio.estadoCuota.name() == 'MOROSO'} ? 'etiqueta moroso' : 'etiqueta al-dia'">Al día</span>
+            </td>
+            <td th:text="${#temporals.format(i.fechaInscripcion, 'dd/MM/yyyy')}">02/03/2026</td>
+            <td class="acciones">
+                <form th:action="@{/inscripciones/{id}/baja(id=${i.id})}" method="post"
+                      onsubmit="return confirm('¿Dar de baja esta inscripción?');">
+                    <button type="submit" class="boton chico peligro">Dar de baja</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p th:if="${#lists.isEmpty(inscripciones)}">Esta actividad todavía no tiene inscriptos.</p>
+
+    <p><a th:href="@{/actividades}">&laquo; Volver a actividades</a></p>
+</main>
+
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>

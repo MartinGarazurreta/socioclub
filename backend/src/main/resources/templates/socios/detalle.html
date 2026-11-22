@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabecera(${socio.nombreCompleto})}"></head>
+<body>
+<header th:replace="~{fragmentos :: encabezado}"></header>
+
+<main>
+    <div class="titulo-seccion">
+        <h2 th:text="${socio.nombreCompleto}">Giménez, Pablo</h2>
+        <div class="acciones">
+            <a th:href="@{/socios/{id}/editar(id=${socio.id})}" class="boton secundario">Editar</a>
+            <a th:href="@{/inscripciones/nueva(socioId=${socio.id})}" class="boton">+ Inscribir</a>
+        </div>
+    </div>
+
+    <p th:if="${mensaje}" th:text="${mensaje}" class="alerta exito"></p>
+
+    <ul class="ficha" th:object="${socio}">
+        <li><strong>DNI:</strong> <span th:text="*{dni}">37890123</span></li>
+        <li><strong>Edad:</strong> <span th:text="*{edad} + ' años'">33 años</span></li>
+        <li><strong>Email:</strong> <span th:text="*{email}">pablo@mail.com</span></li>
+        <li><strong>Teléfono:</strong> <span th:text="*{telefono}">3515550118</span></li>
+        <li><strong>Cuota:</strong>
+            <span th:text="*{estadoCuota.name() == 'MOROSO'} ? 'Moroso' : 'Al día'"
+                  th:class="*{estadoCuota.name() == 'MOROSO'} ? 'etiqueta moroso' : 'etiqueta al-dia'">Al día</span>
+        </li>
+    </ul>
+
+    <h3>Actividades activas</h3>
+    <table th:unless="${#lists.isEmpty(inscripciones)}">
+        <thead>
+        <tr>
+            <th>Actividad</th>
+            <th>Días y horario</th>
+            <th>Cuota</th>
+            <th>Inscripto desde</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="i : ${inscripciones}">
+            <td th:text="${i.actividad.nombre}">Yoga</td>
+            <td th:text="${i.actividad.dias} + ' ' + ${i.actividad.horario}">Mar y Jue 9:00</td>
+            <td th:text="'$ ' + ${#numbers.formatDecimal(i.actividad.cuotaMensual, 1, 'POINT', 0, 'COMMA')}">$ 17.000</td>
+            <td th:text="${#temporals.format(i.fechaInscripcion, 'dd/MM/yyyy')}">02/03/2026</td>
+            <td class="acciones">
+                <form th:action="@{/inscripciones/{id}/baja(id=${i.id})}" method="post"
+                      onsubmit="return confirm('¿Dar de baja esta inscripción?');">
+                    <input type="hidden" name="volverA" value="socio">
+                    <button type="submit" class="boton chico peligro">Dar de baja</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p th:if="${#lists.isEmpty(inscripciones)}">El socio no tiene actividades activas.</p>
+
+    <p><a th:href="@{/socios}">&laquo; Volver al listado de socios</a></p>
+</main>
+
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>

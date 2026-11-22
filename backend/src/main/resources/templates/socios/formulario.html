@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabecera(${titulo})}"></head>
+<body>
+<header th:replace="~{fragmentos :: encabezado}"></header>
+
+<main>
+    <h2 th:text="${titulo}">Nuevo socio</h2>
+
+    <p th:if="${error}" th:text="${error}" class="alerta error"></p>
+
+    <form th:action="@{/socios/guardar}" th:object="${socio}" method="post" class="formulario">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="fila">
+            <div>
+                <label for="apellido">Apellido</label>
+                <input type="text" th:field="*{apellido}" required maxlength="60">
+            </div>
+            <div>
+                <label for="nombre">Nombre</label>
+                <input type="text" th:field="*{nombre}" required maxlength="60">
+            </div>
+        </div>
+
+        <div class="fila">
+            <div>
+                <label for="dni">DNI (sin puntos)</label>
+                <!-- RN7 también en el navegador: 7 u 8 dígitos. El servicio lo vuelve a validar. -->
+                <input type="text" th:field="*{dni}" required pattern="\d{7,8}" maxlength="8" inputmode="numeric"
+                       title="7 u 8 números, sin puntos">
+            </div>
+            <div>
+                <label for="fechaNacimiento">Fecha de nacimiento</label>
+                <input type="date" th:field="*{fechaNacimiento}" required>
+            </div>
+        </div>
+
+        <label for="email">Email</label>
+        <input type="email" th:field="*{email}" maxlength="100">
+
+        <label for="telefono">Teléfono</label>
+        <input type="tel" th:field="*{telefono}" maxlength="30">
+
+        <label for="estadoCuota">Estado de la cuota</label>
+        <select th:field="*{estadoCuota}">
+            <option th:each="e : ${estados}" th:value="${e}"
+                    th:text="${e.name() == 'MOROSO'} ? 'Moroso' : 'Al día'">Al día</option>
+        </select>
+
+        <div class="botones">
+            <button type="submit" class="boton">Guardar</button>
+            <a th:href="@{/socios}" class="boton secundario">Cancelar</a>
+        </div>
+    </form>
+</main>
+
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>

@@ -43,6 +43,7 @@
                       th:class="${cupos.get(a.id) == 0} ? 'cupo sin-cupo' : (${cupos.get(a.id) <= 3} ? 'cupo poco-cupo' : 'cupo')">12</span>
             </td>
             <td class="acciones">
+                <a th:href="@{/actividades/{id}/inscriptos(id=${a.id})}" class="boton chico secundario">Inscriptos</a>
                 <a th:href="@{/actividades/{id}/editar(id=${a.id})}" class="boton chico">Editar</a>
                 <form th:action="@{/actividades/{id}/eliminar(id=${a.id})}" method="post"
                       onsubmit="return confirm('¿Eliminar esta actividad?');">

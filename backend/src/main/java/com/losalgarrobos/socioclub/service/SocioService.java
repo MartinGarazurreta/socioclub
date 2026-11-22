@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +50,9 @@ public class SocioService {
         // RN7 también del lado del servidor: 7 u 8 dígitos, sin puntos
         if (socio.getDni() == null || !socio.getDni().matches("\\d{7,8}")) {
             throw new IllegalArgumentException("El DNI debe tener 7 u 8 números, sin puntos.");
+        }
+        if (socio.getFechaNacimiento() == null || socio.getFechaNacimiento().isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("La fecha de nacimiento no es válida.");
         }
         Optional<Socio> otro = socioRepository.findByDni(socio.getDni());
         if (otro.isPresent() && !otro.get().getId().equals(socio.getId())) {

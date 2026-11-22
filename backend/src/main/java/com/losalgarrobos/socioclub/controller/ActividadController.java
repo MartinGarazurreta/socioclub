@@ -2,6 +2,7 @@ package com.losalgarrobos.socioclub.controller;
 
 import com.losalgarrobos.socioclub.model.Actividad;
 import com.losalgarrobos.socioclub.service.ActividadService;
+import com.losalgarrobos.socioclub.service.InscripcionService;
 import com.losalgarrobos.socioclub.service.ReglaNegocioException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +22,11 @@ import java.util.List;
 public class ActividadController {
 
     private final ActividadService actividadService;
+    private final InscripcionService inscripcionService;
 
-    public ActividadController(ActividadService actividadService) {
+    public ActividadController(ActividadService actividadService, InscripcionService inscripcionService) {
         this.actividadService = actividadService;
+        this.inscripcionService = inscripcionService;
     }
 
     // Listado con cupo disponible
@@ -33,6 +36,16 @@ public class ActividadController {
         model.addAttribute("actividades", actividades);
         model.addAttribute("cupos", actividadService.calcularCuposDisponibles(actividades));
         return "actividades/lista";
+    }
+
+    // RF7: inscriptos activos de una actividad y su cupo disponible
+    @GetMapping("/{id}/inscriptos")
+    public String inscriptos(@PathVariable Long id, Model model) {
+        Actividad actividad = actividadService.buscarPorId(id);
+        model.addAttribute("actividad", actividad);
+        model.addAttribute("inscripciones", inscripcionService.listarActivasPorActividad(id));
+        model.addAttribute("cupoDisponible", actividadService.calcularCupoDisponible(actividad));
+        return "actividades/inscriptos";
     }
 
     // Formulario vacío para el alta

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabecera('Nueva inscripción')}"></head>
+<body>
+<header th:replace="~{fragmentos :: encabezado}"></header>
+
+<main>
+    <h2>Nueva inscripción</h2>
+
+    <!-- Si una regla de negocio rechazó la inscripción, se muestra su mensaje y su código -->
+    <p th:if="${error}" class="alerta error">
+        <strong th:text="${regla} + ':'">RN1:</strong> <span th:text="${error}">La actividad no tiene cupo disponible</span>
+    </p>
+
+    <form th:action="@{/inscripciones}" method="post" class="formulario">
+        <label for="socioId">Socio</label>
+        <select id="socioId" name="socioId" required>
+            <option value="">Elegí un socio…</option>
+            <option th:each="s : ${socios}" th:value="${s.id}" th:selected="${s.id == socioId}"
+                    th:text="${s.nombreCompleto} + ' · DNI ' + ${s.dni} + ' · ' + ${s.edad} + ' años'
+                             + (${s.estadoCuota.name() == 'MOROSO'} ? ' · MOROSO' : '')">Giménez, Pablo · DNI 37890123 · 33 años</option>
+        </select>
+
+        <label for="actividadId">Actividad</label>
+        <select id="actividadId" name="actividadId" required>
+            <option value="">Elegí una actividad…</option>
+            <!-- Las actividades sin cupo se muestran igual: así la regla RN1 la valida el servicio -->
+            <option th:each="a : ${actividades}" th:value="${a.id}" th:selected="${a.id == actividadId}"
+                    th:text="${a.nombre} + ' · ' + ${a.edadMinima} + ' a ' + ${a.edadMaxima} + ' años · '
+                             + (${cupos.get(a.id) > 0} ? (${cupos.get(a.id)} + ' lugares') : 'sin cupo')">Yoga · 16 a 99 años · 1 lugares</option>
+        </select>
+
+        <div class="botones">
+            <button type="submit" class="boton">Inscribir</button>
+            <a th:href="@{/actividades}" class="boton secundario">Cancelar</a>
+        </div>
+    </form>
+</main>
+
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>
