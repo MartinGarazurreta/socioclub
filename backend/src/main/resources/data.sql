@@ -15,7 +15,7 @@ INSERT IGNORE INTO actividades (id, nombre, disciplina, dias, horario, edad_mini
 (7, 'Funcional adultos', 'Fitness',   'Lun, Mié y Vie', '20:30', 18, 65, 30, 22000, 'Paula Luna'),
 (8, 'Yoga',              'Bienestar', 'Mar y Jue',      '9:00',  16, 99, 15, 17000, 'Inés Arguello');
 
--- ---------- Socios de prueba (20, edades variadas, 2 MOROSOS: ids 5 y 12) ----------
+-- ---------- Socios de prueba (22, edades variadas, 2 MOROSOS: ids 5 y 12) ----------
 INSERT IGNORE INTO socios (id, dni, nombre, apellido, fecha_nacimiento, email, telefono, estado_cuota) VALUES
 ( 1, '55123456', 'Tomás',     'Bustamante', '2018-03-15', 'familia.bustamante@mail.com', '3515550101', 'AL_DIA'),
 ( 2, '53987654', 'Valentina', 'Quiroga',    '2016-06-02', 'familia.quiroga@mail.com',    '3515550102', 'AL_DIA'),
@@ -36,7 +36,11 @@ INSERT IGNORE INTO socios (id, dni, nombre, apellido, fecha_nacimiento, email, t
 (17, '45678123', 'Julieta',   'Domínguez',  '2004-04-04', 'julieta.dominguez@mail.com',  '3515550117', 'AL_DIA'),
 (18, '37890123', 'Pablo',     'Giménez',    '1993-09-19', 'pablo.gimenez@mail.com',      '3515550118', 'AL_DIA'),
 (19, '14321987', 'Susana',    'Figueroa',   '1962-07-07', 'susana.figueroa@mail.com',    '3515550119', 'AL_DIA'),
-(20, '49876321', 'Bruno',     'Acosta',     '2009-03-03', 'bruno.acosta@mail.com',       '3515550120', 'AL_DIA');
+(20, '49876321', 'Bruno',     'Acosta',     '2009-03-03', 'bruno.acosta@mail.com',       '3515550120', 'AL_DIA'),
+-- Socios 21 y 22: adultos sin actividades. Sirven para demostrar RN1 en Yoga:
+-- el 21 ocupa el último lugar (15/15) y al 22 se le rechaza por falta de cupo.
+(21, '42345987', 'Rocío',     'Bazán',      '1997-05-21', 'rocio.bazan@mail.com',        '3515550121', 'AL_DIA'),
+(22, '39876012', 'Diego',     'Maldonado',  '1994-11-08', 'diego.maldonado@mail.com',    '3515550122', 'AL_DIA');
 
 -- ---------- Inscripciones ----------
 -- Yoga (cupo 15) queda con 14 inscriptos activos: CASI COMPLETA para demostrar RN1
