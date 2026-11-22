@@ -1,0 +1,64 @@
+.encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 24px;
+  color: var(--blanco);
+  background-color: var(--primario);
+  border-bottom: 4px solid var(--acento);
+}
+
+.encabezado-marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.encabezado-logo {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  font-weight: 700;
+  background-color: var(--acento);
+  border-radius: 50%;
+}
+
+.encabezado h1 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.encabezado-marca p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.encabezado-menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.encabezado-menu a {
+  color: var(--blanco);
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+/* NavLink agrega la clase "active" al enlace de la pantalla actual */
+.encabezado-menu a.active {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  opacity: 1;
+}
+
+.encabezado-socio {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}

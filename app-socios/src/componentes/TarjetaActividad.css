@@ -1,0 +1,77 @@
+.tarjeta-actividad {
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  background-color: var(--blanco);
+  border-top: 5px solid var(--acento);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(29, 53, 87, 0.08);
+}
+
+/* Clase que se agrega desde React cuando cupoDisponible es 0: la tarjeta queda en gris */
+.tarjeta-actividad.sin-cupo {
+  color: var(--gris);
+  background-color: #eceef2;
+  border-top-color: var(--gris-claro);
+  box-shadow: none;
+}
+
+.tarjeta-cabecera {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tarjeta-cabecera h3 {
+  margin: 0;
+}
+
+.tarjeta-disciplina {
+  flex-shrink: 0;
+  padding: 2px 10px;
+  font-size: 0.8rem;
+  color: var(--primario);
+  background-color: var(--primario-claro);
+  border-radius: 999px;
+}
+
+.tarjeta-datos {
+  margin: 12px 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.95rem;
+}
+
+.tarjeta-cuota {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.tarjeta-cuota small {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--gris);
+}
+
+.etiqueta-cupo {
+  margin: 8px 0 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--verde);
+}
+
+.etiqueta-sin-cupo {
+  color: var(--rojo);
+}
+
+.tarjeta-botones {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.tarjeta-botones .boton {
+  flex: 1;
+}

@@ -1,0 +1,46 @@
+.resumen-cuota {
+  padding: 20px;
+  background-color: var(--blanco);
+  border-top: 5px solid var(--primario);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(29, 53, 87, 0.08);
+}
+
+.resumen-cuota h3 {
+  margin-top: 0;
+}
+
+.resumen-cuota ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.resumen-cuota li,
+.resumen-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.resumen-cuota li {
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--gris-claro);
+}
+
+.resumen-descuento {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+  color: var(--verde);
+}
+
+.resumen-total {
+  margin: 12px 0 0;
+  font-size: 1.2rem;
+}
+
+.resumen-ayuda {
+  margin: 10px 0 0;
+  font-size: 0.85rem;
+  color: var(--gris);
+}

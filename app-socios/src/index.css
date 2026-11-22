@@ -1,0 +1,35 @@
+/* Estilos base de la app "Mi Club". Misma paleta que el sitio público y la secretaría. */
+:root {
+  --primario: #1d3557;
+  --primario-claro: #e8eef7;
+  --acento: #e76f51;
+  --fondo: #f4f6fa;
+  --texto: #1b2333;
+  --gris: #6b6b6b;
+  --gris-claro: #d9dde5;
+  --rojo: #b3261e;
+  --verde: #1e7d4f;
+  --blanco: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+  line-height: 1.5;
+  color: var(--texto);
+  background-color: var(--fondo);
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+}
