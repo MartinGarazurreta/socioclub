@@ -1,5 +1,6 @@
 package com.losalgarrobos.socioclub.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +52,17 @@ public class Actividad {
 
     // Una actividad tiene muchas inscripciones. Al eliminar la actividad se eliminan también
     // sus inscripciones dadas de BAJA (el servicio no deja eliminarla si tiene inscripciones ACTIVAS).
+    // @JsonIgnore corta el ciclo infinito al convertir a JSON en la API:
+    // Actividad -> inscripciones -> Inscripcion -> actividad -> inscripciones -> ...
+    // La lista no se manda; las inscripciones se piden por su propio endpoint.
+    @JsonIgnore
     @OneToMany(mappedBy = "actividad", cascade = CascadeType.REMOVE)
     private List<Inscripcion> inscripciones = new ArrayList<>();
+
+    // @Transient: no es una columna de la tabla. Lo completa ActividadService
+    // (cupo máximo - inscripciones ACTIVAS) para que la API lo devuelva en el JSON.
+    @Transient
+    private Long cupoDisponible;
 
     public Actividad() {
     }
@@ -146,5 +157,13 @@ public class Actividad {
 
     public void setInscripciones(List<Inscripcion> inscripciones) {
         this.inscripciones = inscripciones;
+    }
+
+    public Long getCupoDisponible() {
+        return cupoDisponible;
+    }
+
+    public void setCupoDisponible(Long cupoDisponible) {
+        this.cupoDisponible = cupoDisponible;
     }
 }

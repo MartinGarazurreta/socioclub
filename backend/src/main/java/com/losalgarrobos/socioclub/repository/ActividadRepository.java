@@ -8,8 +8,8 @@ import java.util.List;
 // JpaRepository ya trae save, findById, findAll, deleteById, count, etc.
 public interface ActividadRepository extends JpaRepository<Actividad, Long> {
 
-    // Método derivado del nombre: Spring arma "SELECT ... FROM actividades WHERE disciplina = ?"
-    List<Actividad> findByDisciplina(String disciplina);
+    // Método derivado del nombre: Spring arma "SELECT ... FROM actividades WHERE UPPER(disciplina) = UPPER(?)"
+    List<Actividad> findByDisciplinaIgnoreCase(String disciplina);
 
     // Método derivado del nombre: "SELECT ... FROM actividades ORDER BY nombre ASC"
     List<Actividad> findAllByOrderByNombreAsc();

@@ -1,5 +1,6 @@
 package com.losalgarrobos.socioclub.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -51,6 +52,8 @@ public class Socio {
 
     // Un socio tiene muchas inscripciones. mappedBy = "socio" indica que la clave foránea
     // (socio_id) está en la tabla inscripciones, en el atributo "socio" de Inscripcion.
+    // @JsonIgnore: misma razón que en Actividad, evita el ciclo Socio -> Inscripcion -> Socio
+    @JsonIgnore
     @OneToMany(mappedBy = "socio")
     private List<Inscripcion> inscripciones = new ArrayList<>();
 

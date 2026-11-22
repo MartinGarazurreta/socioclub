@@ -28,7 +28,7 @@ public class ActividadService {
     }
 
     public List<Actividad> listarPorDisciplina(String disciplina) {
-        return actividadRepository.findByDisciplina(disciplina);
+        return actividadRepository.findByDisciplinaIgnoreCase(disciplina);
     }
 
     public Actividad buscarPorId(Long id) {
@@ -45,6 +45,23 @@ public class ActividadService {
         return actividad.getCupoMaximo() - contarInscriptosActivos(actividad.getId());
     }
 
+    // Completa el atributo @Transient cupoDisponible (lo usa la API REST para mandarlo en el JSON)
+    public Actividad completarCupo(Actividad actividad) {
+        actividad.setCupoDisponible(calcularCupoDisponible(actividad));
+        return actividad;
+    }
+
+    // Para la API: todas las actividades, o solo las de una disciplina, con su cupo disponible
+    public List<Actividad> listarConCupo(String disciplina) {
+        List<Actividad> actividades = (disciplina == null || disciplina.isBlank())
+                ? listarTodas()
+                : listarPorDisciplina(disciplina.trim());
+        for (Actividad actividad : actividades) {
+            completarCupo(actividad);
+        }
+        return actividades;
+    }
+
     // Devuelve un mapa idActividad -> cupo disponible, para mostrarlo en el listado
     public Map<Long, Long> calcularCuposDisponibles(List<Actividad> actividades) {
         Map<Long, Long> cupos = new HashMap<>();
@@ -56,6 +73,13 @@ public class ActividadService {
 
     @Transactional
     public Actividad guardar(Actividad actividad) {
+        if (actividad.getNombre() == null || actividad.getNombre().isBlank()
+                || actividad.getDisciplina() == null || actividad.getProfesor() == null
+                || actividad.getDias() == null || actividad.getHorario() == null
+                || actividad.getEdadMinima() == null || actividad.getEdadMaxima() == null
+                || actividad.getCupoMaximo() == null || actividad.getCuotaMensual() == null) {
+            throw new IllegalArgumentException("Faltan datos obligatorios de la actividad.");
+        }
         if (actividad.getEdadMinima() > actividad.getEdadMaxima()) {
             throw new IllegalArgumentException("La edad mínima no puede ser mayor que la edad máxima.");
         }
