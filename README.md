@@ -12,16 +12,19 @@ Sistema web para el Club Los Algarrobos, que hoy maneja las inscripciones a mano
 
 También están:
 - [`/postman`](postman): colección de Postman con todos los endpoints de la API.
-- [`/docs`](docs): las pruebas ([`pruebas.md`](docs/pruebas.md)), la [bitácora de IA](docs/bitacora-ia.md) y el [informe técnico en PDF](docs/TPI_SocioClub_GrupoN.pdf). El PDF se genera desde [`docs/informe/informe.html`](docs/informe/informe.html) con *Imprimir → Guardar como PDF* en Chrome.
+- [`/docs`](docs): las pruebas ([`pruebas.md`](docs/pruebas.md)), la [bitácora de IA](docs/bitacora-ia.md) y el [informe técnico en PDF](docs/TPI_SocioClub_Grupo4.pdf). El PDF se genera desde [`docs/informe/informe.html`](docs/informe/informe.html) con *Imprimir → Guardar como PDF* en Chrome.
 
 ## Integrantes
 
+**Grupo 4**
+
 | Integrante | Usuario de GitHub |
 |---|---|
-| Martín Garazurreta | [@MartinGarazurreta](https://github.com/MartinGarazurreta) |
-| Jerenuas Peres | — |
-| _(completar)_ | — |
-| _(completar)_ | — |
+| Alaniz, Agustín | — |
+| Garazurreta Megale, Martín Ignacio Tomás | [@MartinGarazurreta](https://github.com/MartinGarazurreta) |
+| Peres, Jeremías Javier | — |
+| Sajama, Gabriel Héctor | — |
+| Sole, Rocío Aylén | — |
 
 ## Requisitos
 
